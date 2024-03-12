@@ -1,0 +1,14 @@
+a {
+  color: #75b1b1;
+  text-decoration: underline;
+}
+.addSchema {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.schema-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

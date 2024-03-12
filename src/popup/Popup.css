@@ -1,0 +1,11 @@
+.popup-container {
+  width: 400px;
+  position: absolute;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-x: hidden;
+  transition: 0.5s;
+  top: 0px;
+}

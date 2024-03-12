@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+}
+.openDialog {
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 6px;
+  padding: 10px;
+  color: white;
+}
+.container {
+  background-color: #bdbbbb;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,11 @@
+.popup-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: white;
+}
+input {
+  height: 24px;
+}
