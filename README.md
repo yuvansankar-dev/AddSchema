@@ -49,4 +49,5 @@ When user click on “save the segment” data will send to server.
  I've covered various scenarios and edge cases to validate the robustness of the application.
 
  # Deployment
-- [Deployed URL](https://addschema.netlify.app/) 
+- [Front-End Deployed URL](https://addschema.netlify.app/) 
+- [BackEnd Code](https://github.com/yuvansankar-dev/AddSchema_Backend/tree/main) 
