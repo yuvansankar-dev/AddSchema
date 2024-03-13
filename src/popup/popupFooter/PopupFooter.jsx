@@ -1,8 +1,10 @@
 import axios from "axios";
 import "./PopupFooter.css";
-import { useCallback, useMemo } from "react";
+import { useCallback, useContext, useMemo } from "react";
+import { Context } from "../Popup";
 
-const PopupFooter = ({ segmentName, schemaData }) => {
+const PopupFooter = ({ segmentName, schemaData, dispatch, setSegmentName }) => {
+  const { setSelectedSchema } = useContext(Context);
   const buttonDisable = useMemo(
     () => !(segmentName && Object.keys(schemaData.addedSchemas).length),
     [schemaData.addedSchemas, segmentName]
@@ -21,7 +23,7 @@ const PopupFooter = ({ segmentName, schemaData }) => {
     console.log("schemaValue", data);
     axios
       .post(
-        "https://webhook.site/c7ecffc1-ceaf-4937-967d-b915581003fe",
+        "http://webhook.site/c7ecffc1-ceaf-4937-967d-b915581003fe",
         schemaValue
       )
       .then((response) => {
@@ -32,12 +34,20 @@ const PopupFooter = ({ segmentName, schemaData }) => {
       });
   };
 
+  const clearClick = useCallback(() => {
+    setSegmentName("");
+    setSelectedSchema("");
+    dispatch({ type: "reset" });
+  }, [dispatch, setSegmentName, setSelectedSchema]);
+
   return (
     <div className='popup-footer'>
       <button className='save' onClick={saveClick} disabled={buttonDisable}>
         Save the Segment
       </button>
-      <button className='cancel'>Cancel</button>
+      <button className='cancel' onClick={clearClick}>
+        Clear
+      </button>
     </div>
   );
 };

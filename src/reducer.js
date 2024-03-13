@@ -38,6 +38,9 @@ export const reducer = (state, action) => {
         setnonAddedSchemas(draft);
       });
     }
+    case "reset": {
+      return initialState;
+    }
   }
   function setnonAddedSchemas(draft) {
     draft.nonAddedSchemas = { ...draft.schemaList };

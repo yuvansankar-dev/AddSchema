@@ -1,30 +1,48 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import "./AddSchema.css";
 import DropDownOption from "../dropDownOption/DropDownOption";
+import { Context } from "../../../Popup";
 
 const AddSchema = ({ schemaData, dispatch }) => {
   const [showOptions, setShowOptions] = useState(false);
-  const [selected, setSelected] = useState();
   const dropdownRef = useRef();
 
-  const optionList = useMemo(() => {
-    const { [selected]: label, ...optionList } = schemaData.nonAddedSchemas;
-    !label && setSelected();
-    return optionList;
-  }, [schemaData.nonAddedSchemas, selected]);
+  const { selectedSchema, setSelectedSchema } = useContext(Context);
 
-  const dropdownChange = useCallback((value) => {
-    setSelected(value);
-    setShowOptions((pre) => !pre);
-  }, []);
+  const optionList = useMemo(() => {
+    const { [selectedSchema]: label, ...optionList } =
+      schemaData.nonAddedSchemas;
+    return optionList;
+  }, [schemaData.nonAddedSchemas, selectedSchema]);
+
+  const dropdownChange = useCallback(
+    (value) => {
+      setSelectedSchema(value);
+      setShowOptions((pre) => !pre);
+    },
+    [setSelectedSchema]
+  );
 
   const addSchemaClick = useCallback(() => {
     dispatch({
       type: "addNewSchema",
-      payload: selected,
+      payload: selectedSchema,
     });
-    setSelected("");
-  }, [dispatch, selected]);
+    setSelectedSchema("");
+  }, [dispatch, selectedSchema, setSelectedSchema]);
+
+  useEffect(() => {
+    if (!schemaData.nonAddedSchemas[selectedSchema]) {
+      setSelectedSchema("");
+    }
+  }, [schemaData.nonAddedSchemas, selectedSchema, setSelectedSchema]);
 
   return (
     <div>
@@ -35,9 +53,8 @@ const AddSchema = ({ schemaData, dispatch }) => {
           ref={dropdownRef}
         >
           <div>
-            {selected
-              ? schemaData.nonAddedSchemas[selected]
-              : "Add schema to segment"}
+            {schemaData.nonAddedSchemas[selectedSchema] ??
+              "Add schema to segment"}
           </div>
           <div style={{ rotate: showOptions ? "none" : "180deg" }}>^</div>
         </div>
@@ -53,7 +70,7 @@ const AddSchema = ({ schemaData, dispatch }) => {
       )}
 
       <div className='addschema-button'>
-        <a onClick={() => selected && addSchemaClick()}>
+        <a onClick={() => selectedSchema && addSchemaClick()}>
           + Add schema to segment
         </a>
       </div>
