@@ -23,8 +23,8 @@ const PopupFooter = ({ segmentName, schemaData, dispatch, setSegmentName }) => {
     console.log("schemaValue", data);
     axios
       .post(
-        "http://webhook.site/c7ecffc1-ceaf-4937-967d-b915581003fe",
-        schemaValue
+        "https://addschema-backend.onrender.com/sendData",
+        data
       )
       .then((response) => {
         console.log("Response from server:", response.data);
