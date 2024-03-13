@@ -3,8 +3,7 @@
 Page with a button caption “Save segment” will shown
 When click on “Save segment” button a popup will appear
 The popup contains a text box to get the segment name
-And also it has a dropdown name as “Add schema to segment” with
-below options
+And also it has a dropdown name as “Add schema to segment” with below options
 a. Label: First Name Value: first_name
 b. Label: Last Name Value: last_name
 c. Label: Gender Value: gender
